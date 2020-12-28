@@ -1,0 +1,43 @@
+table{
+    position: relative;
+    top: 100px;
+    margin: 0 auto;
+    width: 80%;
+    min-width: 50%;
+    border: 1px solid #808080;
+    border-spacing: 0;
+    border-radius: 4px;
+}
+
+thead{
+    background-color: #808080;
+}
+
+td{
+    text-align: center;
+}
+
+th, td{
+    padding: 3px;
+    border: 1px solid #808080;
+}
+
+#id, #ped, #uf, #actions{
+    width: 5%;
+}
+#code{
+    width: 15%;
+}
+
+td img{
+    cursor: pointer;
+    filter: invert(27%) sepia(78%) saturate(1643%) hue-rotate(334deg) brightness(97%) contrast(93%); 
+}
+
+td img:active{
+    opacity: 0.8;
+}
+
+table tbody tr:nth-child(2n){
+    background-color: #c5c5c5;
+}

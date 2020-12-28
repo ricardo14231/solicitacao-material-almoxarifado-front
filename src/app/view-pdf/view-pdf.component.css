@@ -1,0 +1,243 @@
+
+/*
+    CSS global - no arquivo
+*/
+
+ul li{
+    list-style: none;
+    text-align: center;
+}
+
+/* 
+    header
+*/
+
+.containerView{
+    width: 1236px;
+    height: 100%;
+    padding: 10px;
+    background-color: #fff;
+    font-family: Helvetica, sans-serif; /* "Aharoni"; */
+    position: absolute;
+    left: -1500px; 
+    visibility: hidden;   
+}
+
+.containerPDF{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #000;
+}
+
+
+.headerPDF ul{
+    display: flex;
+}
+
+.headerPDF ul li{
+    width: 100%;
+    height: 80px;
+}
+
+/* Alterar a largura do li da versão da tabela */
+.headerPDF ul li:first-child{
+    display: inline-block;
+    width: 300px;
+    padding: 25px 0px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    
+    -webkit-transform-origin: 30px 20px;
+    -moz-transform-origin: 30px 20px;
+    -ms-transform-origin: 30px 20px;
+    -o-transform-origin: 30px 20px;
+    transform-origin: 50%;
+}
+
+.headerPDF .title{
+    padding: 25px 0px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nameUnity, .nameSecretary{
+    padding: 20px;
+}
+
+.nameUnity span, .nameSecretary span{
+    display: block;
+    font-weight: 700;
+}
+
+.nameSecretary{
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    position: relative;
+    width: 50% !important;
+    margin: 0px 5%;
+}
+
+.logoState img{
+    width: 200px;
+    position: relative;
+    padding: 12px 0px;
+}
+
+/*
+    Setor
+*/
+
+.containerPDF .divSector ul{
+    display: flex;
+}
+
+.divSector ul li{
+    padding: 2px;
+    font-weight: 600;
+    font-size: 14px;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.divSector ul li:first-child{
+    width: 455px;
+    background-color: #c5d9f1;
+    font-style: italic;
+}
+
+.divSector ul li:last-child{
+    border-right: none;
+}
+
+.divSector ul li:nth-child(2){
+    width: 570px;
+}
+.divSector ul li:last-child{
+    width: 190px;
+}
+
+/*
+    Body
+*/
+
+.bodyPDF table{
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.bodyPDF thead{
+    background-color: #c5d9f1;
+    font-size: 14px;
+}
+
+.bodyPDF td{
+    text-align: center;
+    font-size: 14px;
+}
+
+.bodyPDF th, td{
+    padding: 2px;
+    border: 1px solid #808080;
+}
+
+.bodyPDF th:first-child, td:first-child{
+    border-left: none;
+} 
+
+.bodyPDF th:last-child, td:last-child{
+    border-right: none;
+}
+
+.bodyPDF .code{
+    width: 274px;
+}
+.bodyPDF .atend, .bodyPDF .ped, .bodyPDF .it, .bodyPDF .uf{
+    width: 60px;
+}
+
+.bodyPDF .uf{
+    font-style: italic;
+}
+
+.bodyPDF .description{
+    width: 700px;
+    max-width: 700px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-style: italic;
+}
+
+table tbody tr:nth-child(2n){
+    background-color: #f2f2f2;
+}
+
+/*
+    Footer
+*/
+
+.footerPDF{
+    position: absolute;
+    bottom: 11px;
+    border-top: 1px solid #000;
+    width: 1215px;
+    font-size: 12px;
+}
+
+.footerPDF .textNameUnity{
+    border-bottom: 1px solid #000;
+}
+
+.footerPDF ul{
+    display: flex;
+}
+
+.footerPDF ul li{
+    border-right: 1px solid #000;
+    height: 60px;
+    padding: 2px;
+    width: 100%;
+    display: flex;
+    text-align: inherit;
+}
+
+.footerPDF .textNameUnity ul li:first-child{
+    height: 20px; 
+}
+
+.footerPDF ul .textAling{
+    flex-direction: column-reverse;
+}
+
+.footerPDF ul .order{
+    /* width: 70px; */
+}
+
+.footerPDF ul .textColumn {
+    flex-direction: column;
+    text-align: center;
+}
+
+.footerPDF ul .textColumn span{
+    position: relative;
+    top: 10px;
+}
+
+/* Remove a borda do último li para não ficar com a borda sobre a borda do container */
+.footerPDF ul li:last-child{
+    border-right: none;
+}
+
+
+
+

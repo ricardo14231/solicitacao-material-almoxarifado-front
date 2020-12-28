@@ -1,0 +1,56 @@
+<table>
+    <thead>
+        <tr>
+            <th id="id">ID</th>
+            <th id="code">Cód. Simpas</th>
+            <th id="ped">Ped.</th>
+            <th id="name">Descrição do material</th>
+            <th id="uf">UF</th>
+            <th id="actions">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let product of productList; let i = index'>
+            <td>{{ product.id }}</td>
+            <td>{{ product.code }}</td>
+            <td>{{ product.amount }}</td>
+            <td [title]="product.name">{{ product.name }}</td>
+            <td>{{ product.uf }}</td>
+            <td> <img src="assets/clear.svg" (click)="removeProduct(i)"> </td>
+        </tr>
+    </tbody>
+</table>
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

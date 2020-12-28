@@ -1,0 +1,41 @@
+<div class="container">
+    
+    <div class="sector">
+      <label for="sectors">Setor</label>
+      <select id="appearance-select" name="sectors" #valueSelect (change)="selectedSector(valueSelect.value)">
+        <option value="-1"> Selecione </option> 
+        <option *ngFor="let sector of sectors" [value]="sector.name_sector"> {{ sector.name_sector }} </option> 
+      </select>
+    </div>
+  
+  
+    <div class="filter">
+
+      <div class="nameProduct">
+        <img src="assets/search.svg">
+        <input type="text" placeholder="Informe o produto" [formControl]="queryField" [value]="lastProductSelected?.name"/>
+      </div>
+
+      <div class="amountProduct">
+        <input id="amount" type="text" placeholder="Qtd." value="teste" [(ngModel)]="amountProduct"/>
+        <input id="uf" type="text" placeholder="UF" disabled="true" [value]="lastProductSelected?.uf"/> 
+      </div>
+
+      <div class="optionsProduct" *ngIf="options.length > 0">
+        <ul>
+          <li *ngFor="let option of options; let i = index" (click)="productSelected($event.target, i)"> {{ option.name }} </li>
+        </ul>
+      </div>
+      <div class="buttons">
+        <button (click)="addProduct()">Adicionar</button>
+        <button (click)="clearDataInput()">Limpar</button> 
+        <button (click)="generatePDF()">Imprimir</button> 
+
+      </div>
+    </div>
+
+    <app-table [productList]="productList"></app-table>
+    <app-view-pdf [productList]="productList" [sector]="nameSectorSelected"></app-view-pdf>
+
+</div>
+  

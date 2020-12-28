@@ -1,0 +1,66 @@
+<div id="containerView" class="containerView">
+    <div id="containerPDF" class="containerPDF">
+        <div class="headerPDF">
+            <ul>
+                <li class="version"> {{ versionTable }} </li>
+                <li class="title"> Pedido de Material </li>
+                <li class="nameUnity"> HOSPITAL GERAL <span> PRADO VALADARES </span> </li>
+                <li class="nameSecretary"> SECRETARIA DA <span> SAÚDE </span> </li>
+                <li class="logoState"> <img src="assets/logoGoverno.jpg"> </li>
+            </ul>
+        </div>
+    
+        <div class="divSector">
+            <ul>
+                <li> Unidade/Cód SIMPAS </li>
+                <li class="sector"> {{ sector }}</li>
+                <li> {{ currentDate | date:'dd/MM/yyyy HH:mm' }} </li>
+            </ul>
+        </div>
+    
+        <div class="bodyPDF">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="code"> Código SIMPAS </th>
+                        <th class="atend"> Atend. </th>
+                        <th class="ped"> Ped. </th>
+                        <th class="it"> It </th>
+                        <th class="description"> Descrição do material</th>
+                        <th class="uf"> UF </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let product of productList; let i = index'>
+                        <td>{{ product.code }}</td>
+                        <td>  </td>
+                        <td>{{ product.amount }}</td>
+                        <td> {{ i + 1 }} </td>
+                        <td class="description">{{ product.name }}</td>
+                        <td>{{ product.uf }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div class="footerPDF">
+            <div class="textNameUnity">
+                <ul>
+                    <li>HGPV - Hospital Geral Prado Valadares - HGPV - Hospital Geral Prado Valadares - HGPV - Hospital Geral Prado Valadares - HGPV 
+                        - Hospital Geral Prado Valadares - HGPV - Hospital Geral Prado Valadares - HGPV - Hospital  
+                    </li>
+                </ul>
+            </div>
+            
+            <ul>
+                <li class="textAling"> REQUISITANTE: ____/____/____ </li>
+                <li class="textAling"> ATENDIDO: _____/_____/_____ </li>
+                <li class="textAling"> RECEBIDO: _____/_____/_____ </li>
+                <li class="order"> PEDIDO Nº </li>
+                <li class="textColumn"> LANÇADO NO SIMPAS: <span> _____/_____/_____ </span> </li>
+                <li class="textColumn"> CONFERIDO: <span> _____/_____/_____ </span> </li>
+            </ul>
+        </div>
+    </div> 
+</div>
