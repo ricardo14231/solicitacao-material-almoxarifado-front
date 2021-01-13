@@ -17,8 +17,10 @@ ul li{
     height: 100%;
     padding: 10px;
     background-color: #fff;
-    font-family: Helvetica, sans-serif; /* "Aharoni"; */
     position: absolute;
+    top: 0px;
+    /* top: 400px;
+    left: 0px;  */
     left: -1500px; 
     visibility: hidden;   
 }
@@ -109,9 +111,8 @@ ul li{
 }
 
 .divSector ul li:first-child{
-    width: 455px;
+    width: 352px;
     background-color: #c5d9f1;
-    font-style: italic;
 }
 
 .divSector ul li:last-child{
@@ -119,10 +120,10 @@ ul li{
 }
 
 .divSector ul li:nth-child(2){
-    width: 570px;
+    width: 702px;
 }
 .divSector ul li:last-child{
-    width: 190px;
+    width: 160px;
 }
 
 /*
@@ -145,9 +146,22 @@ ul li{
     font-size: 14px;
 }
 
-.bodyPDF th, td{
+.bodyPDF th, .bodyPDF td{
     padding: 2px;
-    border: 1px solid #808080;
+    border: 1px solid #000;
+}
+
+.bodyPDF th {
+    border-right: transparent !important;
+}
+
+.bodyPDF tr td {
+    border-top: transparent !important;
+    border-right: transparent !important;
+}
+
+.bodyPDF tr td:first-child {
+    border-left: transparent !important;
 }
 
 .bodyPDF th:first-child, td:first-child{
@@ -159,23 +173,18 @@ ul li{
 }
 
 .bodyPDF .code{
-    width: 274px;
+    width: 164px;
 }
 .bodyPDF .atend, .bodyPDF .ped, .bodyPDF .it, .bodyPDF .uf{
     width: 60px;
 }
 
-.bodyPDF .uf{
-    font-style: italic;
-}
-
 .bodyPDF .description{
-    width: 700px;
-    max-width: 700px;
+    width: 780px;
+    max-width: 780px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-style: italic;
 }
 
 table tbody tr:nth-child(2n){

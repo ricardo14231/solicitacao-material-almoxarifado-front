@@ -1,16 +1,32 @@
-table{
-    position: relative;
-    top: 100px;
+.containerTable{
+    width: 98%;
+    height: 100%;
     margin: 0 auto;
-    width: 80%;
-    min-width: 50%;
+    overflow: hidden;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #fff;
+}
+ 
+.containerTable table{
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
     border: 1px solid #808080;
     border-spacing: 0;
     border-radius: 4px;
+    max-height: 66%;
+    overflow: auto;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    border-bottom: transparent;
+
 }
 
 thead{
-    background-color: #808080;
+    background-color: #f8f9fe;
+    color: #32325d;
 }
 
 td{
@@ -19,7 +35,18 @@ td{
 
 th, td{
     padding: 3px;
-    border: 1px solid #808080;
+    border: 1px solid #e9ecef;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, .05);;
+
+}
+
+tbody tr td input{
+    width: 75px;
+    font-size: 16px;
+    padding: 8px;
 }
 
 #id, #ped, #uf, #actions{
@@ -39,5 +66,5 @@ td img:active{
 }
 
 table tbody tr:nth-child(2n){
-    background-color: #c5c5c5;
+    background-color: rgba(0, 0, 0, .05);
 }

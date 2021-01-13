@@ -1,4 +1,4 @@
-<div id="containerView" class="containerView">
+<div id="containerView" class="containerView" #containerView>
     <div id="containerPDF" class="containerPDF">
         <div class="headerPDF">
             <ul>
@@ -22,10 +22,10 @@
             <table>
                 <thead>
                     <tr>
+                        <th class="it"> It </th>
                         <th class="code"> Código SIMPAS </th>
                         <th class="atend"> Atend. </th>
                         <th class="ped"> Ped. </th>
-                        <th class="it"> It </th>
                         <th class="description"> Descrição do material</th>
                         <th class="uf"> UF </th>
                         
@@ -33,10 +33,10 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let product of productList; let i = index'>
-                        <td>{{ product.code }}</td>
-                        <td>  </td>
-                        <td>{{ product.amount }}</td>
                         <td> {{ i + 1 }} </td>
+                        <td>{{ product.code }}</td>
+                        <td></td>
+                        <td>{{ product.amount }}</td>
                         <td class="description">{{ product.name }}</td>
                         <td>{{ product.uf }}</td>
                     </tr>

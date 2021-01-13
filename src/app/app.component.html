@@ -1,1 +1,20 @@
-<app-filter></app-filter>
+<div class="containerApp">
+    <app-header></app-header>
+
+    <app-dialog></app-dialog>
+
+    <app-filter></app-filter>
+    <app-table [productList]="productList"></app-table>
+
+    <app-view-pdf [productList]="productList" [sector]="nameSector"></app-view-pdf> 
+
+    <div class="buttons">
+        <button (click)="generatePDF()">Imprimir</button> 
+        <button (click)="downloadPDF()">Download</button>
+        <button (click)="setFavoriteOrder()" >Favoritar</button> 
+    </div>
+    <app-add-favorite-modal></app-add-favorite-modal>
+    <app-footer></app-footer>
+</div>
+
+    
