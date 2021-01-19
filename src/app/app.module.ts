@@ -11,7 +11,7 @@ import { ViewPdfComponent } from './components/view-pdf/view-pdf.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AddFavoriteModalComponent } from './components/add-favorite-modal/add-favorite-modal.component';
-import { DialogComponent } from './components/dialog/dialog.component';
+import { MessageComponent } from './components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     HeaderComponent,
     FooterComponent,
     AddFavoriteModalComponent,
-    DialogComponent
+    MessageComponent
   ],
   imports: [
     BrowserModule,

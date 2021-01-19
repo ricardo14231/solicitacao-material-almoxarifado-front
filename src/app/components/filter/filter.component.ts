@@ -2,11 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 import { FilterService } from 'src/app/services/filter.service';
 import { FormControl } from '@angular/forms';
-import { tap, map, filter, distinctUntilChanged, debounceTime, switchMap } from 'rxjs/operators';
+import { map, filter, debounceTime, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Sector } from 'src/app/models/sector.model';
 import { FavoriteService } from 'src/app/services/favorite/favorite.service';
-import { DialogService } from 'src/app/services/dialog/dialog.service';
+import { MessageService } from 'src/app/services/message/message.service';
 import { borderBottomLeftRadius } from 'html2canvas/dist/types/css/property-descriptors/border-radius';
 
 
@@ -20,11 +20,10 @@ export class FilterComponent implements OnInit {
   constructor(
     private filterService: FilterService,
     private teste: FavoriteService,
-    private dialogService: DialogService,
+    private messageService: MessageService,
   ) { }
 
-  sectors: Sector [] = [];
-  //nameSectorSelected: string = null;
+  sectors: string [];
   queryField = new FormControl();
   result: Observable<any>;
   options: Product [] = [];
@@ -44,16 +43,9 @@ export class FilterComponent implements OnInit {
     this.initListSector();
     this.initSearchProduct();
     this.searchResult();
-    
-    this.teste.getFavorite(1).subscribe( t => {
-      console.log(t)
-     // this.productList.push(t)
-    })
-
   }
 
   public focusFunction(event): void{
-    console.log(event)
     if(event.type == 'focus'){
       if(event.target.name == 'inputProduct'){
         this.divProduct.nativeElement.style.boxShadow = "0px -2px 3px 2px #c5c5c5"; 
@@ -78,7 +70,9 @@ export class FilterComponent implements OnInit {
 
   public initListSector(): void{
     this.filterService.listSector().subscribe((res: Sector[]) => {
-      this.sectors = res;
+      this.sectors = res.map((sector : Sector) => {
+        return sector.name_sector.substring(14, sector.name_sector.length);
+      });
     });
   }
 
@@ -87,27 +81,35 @@ export class FilterComponent implements OnInit {
     this.result = this.queryField.valueChanges
       .pipe(
         map(value => value.trim()),
-        filter(value => value.length > 3),
+        filter(value => this.productWordSize(value)),
         debounceTime(500), 
         switchMap(value => this.filterService.searchProduct(value))
       );
+  }
 
+  private productWordSize(value: string): boolean{
+    if(value.length > 3){
+      return true;
+    }else{
+      // Se o nome do produto for menos que 3 limpa o array o que removerá a DIV da tela.  
+      this.clearListOfProduct();
+      return false;
+    }
   }
 
   public searchResult(): void{
     this.result.subscribe((res: Product[]) => {
       this.options = res;
-      console.log(res)
+
       if(this.options[0] == undefined){
-        this.dialogService.dialog("Produto não cadastrado!", "alert");
+        this.messageService.message("Produto não cadastrado!", "alert", 2);
       }
-      console.log(this.options.length)
+
       if(this.options.length > 0){
         this.borderRadiusFucntion(true);
       }else{
         this.borderRadiusFucntion(false);
       }
-
     });
   }
 
@@ -126,33 +128,41 @@ export class FilterComponent implements OnInit {
     this.borderRadiusFucntion(false);
   }
 
-  public addProduct(){
+  public addProduct(): void{
     
-    //TO DO
-    //VER SE DÁ PARA COLOCAR VIA FORMCONTROLE PARA ELIMINAR ESSA VARIÁVEL
-    this.lastProductSelected.amount = this.amountProduct;
+    //SEPARAR ESSA FUNÇÃO EM OUTRAS
+
+    if(this.lastProductSelected != null){
+      //TO DO
+      //VER SE DÁ PARA COLOCAR VIA FORMCONTROLE PARA ELIMINAR ESSA VARIÁVEL
+      this.lastProductSelected.amount = this.amountProduct;
+      
+      //Verifica se o item selecionado já está na lista; Se tiver ele não é adicionado
+      if(this.productAlreadySelected(this.lastProductSelected)){
+        this.messageService.message('Produto já adicionado!', 'alert', 4)
+      }else{
+
+        this.productList.push(this.lastProductSelected);
+      
+        //Compartilha a lista de produtos para os outros componentes via Service
+        this.filterService.productList(this.productList);
     
-    //Verifica se o item selecionado já está na lista; Se tiver ele não é adicionado
-    if(this.productAlreadySelected(this.lastProductSelected)){
-      this.dialogService.dialog('Produto já adicionado', 'alert')
+        // PARA LIMPAR O INPUT DO FILTRO DE PRODUTO - MIDIFICAR PARA LIMPAR O CAMPO SEM REMOVER O ULTIMO PRODUTO SELECIONADO
+        this.clearDataInput();
+
+        this.borderRadiusFucntion(false);
+
+      }
     }else{
-
-      this.productList.push(this.lastProductSelected);
-    
-      //Compartilha a lista de produtos para os outros componentes via Service
-      this.filterService.productList(this.productList);
-  
-      // PARA LIMPAR O INPUT DO FILTRO DE PRODUTO - MIDIFICAR PARA LIMPAR O CAMPO SEM REMOVER O ULTIMO PRODUTO SELECIONADO
-      this.clearDataInput();
-
-      this.borderRadiusFucntion(false);
-
+      this.messageService.message('Selecione um produto!', 'alert', 3) 
     }
+    
   }
 
   public clearDataInput(): void{
     this.amountProduct = null;
     this.lastProductSelected = null;
+    this.queryField.setValue('');
   }
   
   public selectedSector(value): void{
@@ -160,8 +170,16 @@ export class FilterComponent implements OnInit {
   }
 
   public getFavoriteOrder(): void{
-    let fade = document.getElementById('fade');
-    fade.style.display = "flex"
+
+    let newFunctionality: Boolean = false;
+    //REMOVER QUANDO IMPREMENTAR A FUNCIONALIDADE
+    if(newFunctionality){
+      let fade = document.getElementById('fade');
+      fade.style.display = "flex"
+    }else{
+      this.messageService.message('Funcionalidade em desenvolvimento!', 'danger', 6);
+    }
+    
   }
 
   private productAlreadySelected(product: Product): boolean{
@@ -171,4 +189,5 @@ export class FilterComponent implements OnInit {
 
     return true;
   }
+  
 }

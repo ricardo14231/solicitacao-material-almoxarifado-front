@@ -1,5 +1,8 @@
 .containerFooter{
+    position: absolute;
     width: 100%;
-    height: 100%;
-    background-color: #d7c7c8;
+    height: 30px;
+    background-color: #fafafa;
+    bottom: 0px;
+    border-top: 1px solid #e4e4e4;
 }

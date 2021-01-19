@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ViewPdfComponent } from './components/view-pdf/view-pdf.component';
 import { Product } from './models/product.model';
-import { DialogService } from './services/dialog/dialog.service';
+import { MessageService } from './services/message/message.service';
 import { FilterService } from './services/filter.service';
 import { GeneratePdfService } from './services/pdf/generate-pdf.service';
 
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
   constructor(
     private filterService: FilterService,
     private generatePDFService: GeneratePdfService,
-    private dialogService: DialogService,
+    private messageService: MessageService,
   ) { }
 
   nameSector: string = '-1';
@@ -36,9 +36,8 @@ export class AppComponent implements OnInit{
       //Para setar a data/hora da impressão
       setTimeout(()=> {
         this.generatePDFService.generatePDF(this.containerView.containerView.nativeElement, true);
-        console.log("teste1")
+        
       },200)
-      console.log("teste2")
     }
   }
   
@@ -48,26 +47,32 @@ export class AppComponent implements OnInit{
   }
 
   public setFavoriteOrder(): void{
-
+    let newFunctionality: Boolean = false;
+    //REMOVER QUANDO IMPREMENTAR A FUNCIONALIDADE
+    if(newFunctionality){
+      let fade = document.getElementById('fade');
+      fade.style.display = "flex"
+    }else{
+      this.messageService.message('Funcionalidade em desenvolvimento!', 'danger', 6);
+    }
+    
   }
 
   private getNameSector(): void{
     this.filterService.nameSectorEmitter.subscribe((value => {
       this.nameSector = value;
-      console.log(this.nameSector)
     }));
   }
 
   private getProductList(): void{
     this.filterService.productListEmitter.subscribe((value => {
       this.productList = value;
-      console.log(this.productList)
     }));
   }
 
   private selectedSector(): boolean{
     if(this.nameSector == '-1'){
-      this.dialogService.dialog('Selecione o setor!', 'danger');
+      this.messageService.message('Selecione o setor!', 'danger', 1);
       return false;
     }
     return true;
@@ -75,7 +80,7 @@ export class AppComponent implements OnInit{
 
   private selectedProduct(): boolean{   
     if(this.productList.length == 0){
-      this.dialogService.dialog('Lista de produtos vazia!', 'danger');
+      this.messageService.message('Lista de produtos vazia!', 'danger', 5);
       return false;
     }
     return true;

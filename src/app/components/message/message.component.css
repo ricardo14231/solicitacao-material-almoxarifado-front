@@ -1,0 +1,72 @@
+.containerMessage{
+    position: absolute;
+    max-height: 75%;
+    z-index: 10;
+    padding: 2px;
+    right: 10px;
+    overflow: auto;
+}
+
+.cardMessage{
+    width: 300px;
+    height: auto;
+    max-height: 100px;
+    overflow: hidden;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: block;
+    right: 10px;
+    z-index: 10;
+    opacity: 0.9;
+    animation: in 5s linear;
+}
+
+@keyframes in {
+    0% { opacity: 0; }
+    5% { opacity: 0.6; }
+    15% { opacity: 0.9; }
+    90% { opacity: 0.8; }
+    95% { opacity: 0.5; }
+    100% { opacity: 0; }
+}
+
+ul li {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-height: 80px;
+}
+
+ul li span{
+    display: block;
+    width: 90%;
+    max-height: 80px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+ul li img{
+    transform: scale(1.2);
+    cursor: pointer;
+    filter: invert(100%) sepia(99%) saturate(0%) hue-rotate(322deg) brightness(107%) contrast(100%);
+}
+
+ul li img:active{
+    opacity: 0.8;
+}
+
+.cardMessage.success{
+    background-color: #d4edda;
+}
+
+.cardMessage.alert{
+    background-color: #ffbf00;
+    color: #fff;
+}
+
+.cardMessage.danger{
+    background-color: #ff2244;
+    color: #fff;
+}

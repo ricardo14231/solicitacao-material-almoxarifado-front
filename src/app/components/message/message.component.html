@@ -1,0 +1,12 @@
+<div class="containerMessage" *ngIf="dialogMessage.length > 0">
+    <ng-container *ngFor="let message of dialogMessage, let i = index">
+        <ul class="cardMessage {{ message.messageType }}" >
+            <li>
+                <span> {{ message.message }} </span>   
+                <img id="{{i}}" src="assets/close.svg" title="Fechar" (click)="removeMessage($event)">     
+            </li>
+        </ul>
+    </ng-container>
+    
+</div>
+

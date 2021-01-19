@@ -15,7 +15,7 @@
           "options": {
             "outputPath": "dist/Sistema-Pedidos-Almoxarifado",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "main": "src/main.ts", 
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,

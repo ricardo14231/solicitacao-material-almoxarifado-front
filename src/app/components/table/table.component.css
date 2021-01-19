@@ -1,8 +1,9 @@
 .containerTable{
     width: 98%;
     height: 100%;
+    position: relative;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: auto;
     padding: 10px;
     border-radius: 4px;
     background-color: #fff;
@@ -25,8 +26,8 @@
 }
 
 thead{
-    background-color: #f8f9fe;
-    color: #32325d;
+    background-color: #f9f9f9;
+    color: #323232;
 }
 
 td{
@@ -53,7 +54,7 @@ tbody tr td input{
     width: 5%;
 }
 #code{
-    width: 15%;
+    width: 18%;
 }
 
 td img{
