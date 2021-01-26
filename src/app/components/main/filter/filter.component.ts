@@ -1,13 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
-import { FilterService } from 'src/app/services/filter.service';
+import { FilterService } from 'src/app/services/filter/filter.service';
 import { FormControl } from '@angular/forms';
 import { map, filter, debounceTime, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Sector } from 'src/app/models/sector.model';
 import { FavoriteService } from 'src/app/services/favorite/favorite.service';
 import { MessageService } from 'src/app/services/message/message.service';
-import { borderBottomLeftRadius } from 'html2canvas/dist/types/css/property-descriptors/border-radius';
+import { SectorService } from 'src/app/services/serctor/sector.service';
 
 
 @Component({
@@ -19,6 +19,7 @@ export class FilterComponent implements OnInit {
 
   constructor(
     private filterService: FilterService,
+    private sectorService: SectorService,
     private teste: FavoriteService,
     private messageService: MessageService,
   ) { }
@@ -69,7 +70,7 @@ export class FilterComponent implements OnInit {
   }
 
   public initListSector(): void{
-    this.filterService.listSector().subscribe((res: Sector[]) => {
+    this.sectorService.listSector().subscribe((res: Sector[]) => {
       this.sectors = res.map((sector : Sector) => {
         return sector.name_sector.substring(14, sector.name_sector.length);
       });
@@ -166,7 +167,7 @@ export class FilterComponent implements OnInit {
   }
   
   public selectedSector(value): void{
-    this.filterService.nameSector(value);
+    this.sectorService.nameSector(value);
   }
 
   public getFavoriteOrder(): void{

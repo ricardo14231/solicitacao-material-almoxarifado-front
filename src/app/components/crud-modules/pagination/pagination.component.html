@@ -1,0 +1,16 @@
+<div class="containerPagination">
+    <div class="panel">
+        <small>
+            Página {{ currentPage }} de {{ totalPage }}, mostrado 1 de 10 registros.
+        </small>
+    </div>
+    
+    <div class="pagination">
+        <button (click)="previousPage()"> <img src="assets/navigate_before.svg"> Anterior</button>
+        <ol #buttonPageView>
+            <li #li *ngFor="let buttonPage of buttonsPageView" id="{{ buttonPage }}"> {{ buttonPage }} </li>
+        </ol>
+        <button (click)="nextPage()">Próximo <img src="assets/navigate_next.svg"> </button>
+    
+    </div>
+</div>

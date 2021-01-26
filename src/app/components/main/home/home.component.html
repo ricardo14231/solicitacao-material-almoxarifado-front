@@ -1,0 +1,9 @@
+<app-filter></app-filter>
+<app-table ></app-table>
+<div class="buttonsBottom">
+    <button title="Imprimir Pedido" (click)="printPDF()"><img src="assets/print.svg"> Imprimir</button> 
+    <button title="Baixar Pedido" (click)="downloadPDF()"><img src="assets/save.svg"> Download</button>
+    <button title="Favoritar Pedido" (click)="setFavoriteOrder()"><img src="assets/star.svg"> Favoritar</button> 
+</div>
+<app-favorite-modal></app-favorite-modal>
+<app-view-pdf></app-view-pdf> 

@@ -2,7 +2,6 @@ import { EventEmitter, Injectable } from '@angular/core';
 
 import { jsPDF } from 'jspdf';
 import html2PDF from 'html2canvas';
-import { Product } from 'src/app/models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +10,7 @@ export class GeneratePdfService {
 
   constructor( ) { }
 
-  public emitterProducts = new EventEmitter<Product[]>();
-
   public currentDateEmitter = new EventEmitter<Date>();
-
-  //Remover para um serviço de produtos
-  public listProduct(products: Product[]): void{
-    this.emitterProducts.emit(products);
-  }
 
   //Envia a data da impressão para o templete da view do pdf.
   public currentDataPrintPDF(): void{
@@ -29,7 +21,7 @@ export class GeneratePdfService {
   public generatePDF(doc, print: boolean): void{
     html2PDF(doc, {
       onclone: function (clonedDoc) {  
-        clonedDoc.getElementById('containerView').style.visibility = 'visible';
+        clonedDoc.getElementById('containerViewPDF').style.visibility = 'visible';
         },
         scale: 3, //Melhora a qualiadde da imagem gerada 
         backgroundColor: '#fff'
