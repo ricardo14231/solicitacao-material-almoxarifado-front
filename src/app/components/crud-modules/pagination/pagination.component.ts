@@ -17,8 +17,8 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   @ViewChildren('li') teste: QueryList<any>;
   
   private perPage: number = 5;
-  private currentPage: number = 1;
-  private totalPage: number;
+  public currentPage: number = 1;
+  public totalPage: number;
   private minLeft: number = 1;
   private maxRight: number = 3;
   private amountButtonPagination: number = 3;

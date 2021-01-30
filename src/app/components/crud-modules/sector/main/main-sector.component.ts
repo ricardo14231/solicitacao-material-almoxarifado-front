@@ -28,8 +28,6 @@ export class MainSectorComponent implements OnInit, AfterViewInit {
       });
     });
 
-    
-
     this.initSector();
   }
 
@@ -47,8 +45,6 @@ export class MainSectorComponent implements OnInit, AfterViewInit {
     this.paginationService.currentPageEmitter.subscribe((res) => {
       this.sectorService.sectorPerPage((res.page - 1) * res.perPage, res.perPage).subscribe((res) => {
         this.sectors = res;
-     /*   console.log(res) */
-
       });
     })
   }
