@@ -9,7 +9,7 @@
 .containerSector .header{
     display: flex;
     justify-content: space-between;
-    height: 100px;
+    height: 80px;
 }
 
 .containerSector .header span{
@@ -20,37 +20,4 @@
 
 .containerSector .header button{
     background-color: #007bff;
-}
-
-.containerSector table{
-    width: 100%;
-}
-
-table tr td{
-    text-align: center;
-    padding: 10px;
-}
-
-table th.sectorId{
-    width: 5%;
-}
-
-table th.sectorName{
-    width: 75%;
-}
-
-table tr td.sectorName{
-    text-align: left;
-    max-width: 700px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-table th.sectorActive{
-    width: 5%;
-}
-
-table th.sectorActions{
-    width: 15%;
 }

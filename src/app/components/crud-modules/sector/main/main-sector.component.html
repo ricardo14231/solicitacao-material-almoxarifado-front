@@ -4,30 +4,13 @@
         <button>Novo</button>
     </div>
 
-    <div class="dataTable">
-        <table>
-            <thead>
-                <tr>
-                    <th class="sectorId">ID</th>
-                    <th class="sectorName">Nome</th>
-                    <th  class="sectorActive">Ativo</th>
-                    <th class="sectorActions">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let sector of sectors">
-                    <td> {{ sector.id_sector }} </td>
-                    <td class="sectorName" title="{{ sector.name_sector }}"> {{ sector.name_sector }} </td>
-                    <td><input type="checkbox"></td>
-                    <td>
-                        <img class="imgEdit" src="assets/edit.svg">
-                        <img class="imgDelete" src="assets/restore.svg">
-                        <img class="imgDescription" src="assets/description.svg">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="tab">
+        <span routerLink="list" routerLinkActive="optionTab active">Listar</span>
+        <span routerLink="new" routerLinkActive="optionTab active">Cadastrar</span>
     </div>
+    <div class="crud main">
+        <router-outlet></router-outlet>
+    </div>
+    
 
-    <app-pagination></app-pagination>
 </div>

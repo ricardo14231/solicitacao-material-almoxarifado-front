@@ -18,15 +18,17 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   
   private perPage: number = 5;
   public currentPage: number = 1;
-  public totalPage: number;
+  public totalPage: number = 1;
   private minLeft: number = 1;
   private maxRight: number = 3;
   private amountButtonPagination: number = 3;
+  public totalItems: number = 0;
   
   buttonsPageView: number [] = [1, 2, 3];
 
   ngOnInit(): void {    
     this.paginationService.totalPageEmitter.subscribe((res: number) => {
+      this.totalItems = res;  
       this.totalPage = Math.ceil(res / this.perPage);
     });
 
@@ -117,4 +119,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     });
   }
 
+  public numberOfItemsdisplayed(): number{
+    return ((this.totalPage !== 1 && this.currentPage !== this.totalPage) ? this.currentPage * this.perPage : this.totalItems);
+  }
 } 

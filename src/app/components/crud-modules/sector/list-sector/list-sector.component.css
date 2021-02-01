@@ -1,0 +1,38 @@
+.dataTable{
+    position: relative;
+    top: 20px;
+    height: calc(100% - 20px);
+}
+
+table{
+    width: 100%;
+}
+
+table tr td{
+    text-align: center;
+    padding: 10px;
+}
+
+table th.sectorId{
+    width: 5%;
+}
+
+table th.sectorName{
+    width: 75%;
+}
+
+table tr td.sectorName{
+    text-align: left;
+    max-width: 700px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+table th.sectorActive{
+    width: 5%;
+}
+
+table th.sectorActions{
+    width: 15%;
+}

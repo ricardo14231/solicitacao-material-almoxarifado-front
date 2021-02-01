@@ -1,0 +1,15 @@
+.nameSector, .activeSector{
+    position: relative;
+    margin-top: 10px;
+}
+
+#nameSector{
+    display: block;
+    margin-top: 5px;
+}
+
+.activeSector{
+    position: relative;
+    top: 10px;
+    display: flex;
+}
