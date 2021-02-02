@@ -17,8 +17,6 @@ export class FavoriteService {
 
   public getFavorite(id_sector: number): Observable<Favorite>{
     return this.http.get<Favorite>(`${this.API}/getFavorite/${id_sector}`);
-
-    
   }
 
 }

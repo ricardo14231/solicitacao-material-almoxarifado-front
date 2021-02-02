@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddFavoriteModalComponent } from './add-favorite-modal.component';
+import { ListSectorComponent } from './list-sector.component';
 
-describe('AddFavoriteModalComponent', () => {
-  let component: AddFavoriteModalComponent;
-  let fixture: ComponentFixture<AddFavoriteModalComponent>;
+describe('ListSectorComponent', () => {
+  let component: ListSectorComponent;
+  let fixture: ComponentFixture<ListSectorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddFavoriteModalComponent ]
+      declarations: [ ListSectorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddFavoriteModalComponent);
+    fixture = TestBed.createComponent(ListSectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

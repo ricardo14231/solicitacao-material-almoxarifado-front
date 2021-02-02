@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-add-favorite-modal',
-  templateUrl: './add-favorite-modal.component.html',
-  styleUrls: ['./add-favorite-modal.component.css']
+  selector: 'app-favorite-modal',
+  templateUrl: './favorite-modal.component.html',
+  styleUrls: ['./favorite-modal.component.css']
 })
-export class AddFavoriteModalComponent implements OnInit {
+export class FavoriteModalComponent implements OnInit {
 
   constructor() { }
 

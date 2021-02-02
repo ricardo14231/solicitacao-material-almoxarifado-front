@@ -3,15 +3,18 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { CrudModule } from './components/crud-modules/crud.module';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TableComponent } from './components/table/table.component';
-import { FilterComponent } from './components/filter/filter.component';
+import { TableComponent } from './components/main/table/table.component';
+import { FilterComponent } from './components/main/filter/filter.component';
 import { ViewPdfComponent } from './components/view-pdf/view-pdf.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AddFavoriteModalComponent } from './components/add-favorite-modal/add-favorite-modal.component';
+import { FavoriteModalComponent } from './components/favorite-modal/favorite-modal.component';
 import { MessageComponent } from './components/message/message.component';
+import { HomeComponent } from './components/main/home/home.component';
 
 @NgModule({
   declarations: [
@@ -21,15 +24,17 @@ import { MessageComponent } from './components/message/message.component';
     ViewPdfComponent,
     HeaderComponent,
     FooterComponent,
-    AddFavoriteModalComponent,
-    MessageComponent
+    FavoriteModalComponent,
+    MessageComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CrudModule,
   ],
   providers: [
     

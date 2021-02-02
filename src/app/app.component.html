@@ -2,18 +2,10 @@
     <app-header></app-header>
 
     <app-message></app-message>
-
-    <app-filter></app-filter>
-    <app-table [productList]="productList"></app-table>
-
-    <app-view-pdf [productList]="productList" [sector]="nameSector"></app-view-pdf> 
-
-    <div class="buttonsBottom">
-        <button title="Imprimir Pedido" (click)="generatePDF()"><img src="assets/print.svg"> Imprimir</button> 
-        <button title="Baixar Pedido" (click)="downloadPDF()"><img src="assets/save.svg"> Download</button>
-        <button title="Favoritar Pedido" (click)="setFavoriteOrder()"><img src="assets/star.svg"> Favoritar</button> 
+    <div class="containerMain">
+        <router-outlet></router-outlet>
     </div>
-    <app-add-favorite-modal></app-add-favorite-modal>
+
     <app-footer></app-footer>
 </div>
 

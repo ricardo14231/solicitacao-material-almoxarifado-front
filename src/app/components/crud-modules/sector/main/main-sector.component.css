@@ -1,0 +1,23 @@
+.containerSector{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.containerSector .header{
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+}
+
+.containerSector .header span{
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 1.5px;
+}
+
+.containerSector .header button{
+    background-color: #007bff;
+}
