@@ -23,7 +23,7 @@
     <div class="amountProduct" #divAmountProduct>
       <input id="amount" type="number" placeholder="Qtd." name="inputAmount" 
         (focus)="focusFunction($event)" (focusout)="focusFunction($event)" 
-        [(ngModel)]="amountProduct" min="1"/>
+        [(ngModel)]="amountProduct" min="1" required/>
       <input id="uf" type="text" placeholder="UF" [disabled]="productListed" [(ngModel)]="fieldUF" maxlength="2"/> 
     </div>
   </div>

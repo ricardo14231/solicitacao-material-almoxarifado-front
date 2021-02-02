@@ -27,18 +27,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getNameSector();
     this.getProductList();
-
-    setTimeout(() => {
-      console.log(this.containerPDF.currentDate)
-
-      console.log(this.containerPDF.containerViewPDF.nativeElement)
-
-  
-      }, 400)
-      
   }
 
-  
   public printPDF(): void{
 
     if(this.selectedSector() && this.selectedProduct()){
@@ -46,9 +36,7 @@ export class HomeComponent implements OnInit {
       //To-DO - colocar uma promisse
       //Para setar a data/hora da impressão
       setTimeout(()=> {
-        console.log(this.containerPDF.containerViewPDF)
-        this.generatePDFService.generatePDF(this.containerPDF.containerViewPDF.nativeElement, true);
-        
+        this.generatePDFService.generatePDF(this.containerPDF.containerViewPDF.nativeElement, true);        
       },200)
     }
   }

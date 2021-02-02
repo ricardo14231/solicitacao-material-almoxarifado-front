@@ -8,14 +8,14 @@
     background-color: #fff;
 }
  
-.containerTable 
-
-
-
 tbody tr td input{
     width: 75px;
     font-size: 16px;
     padding: 8px;
+}
+
+tbody .description{
+    text-align: left;
 }
 
 #id, #ped, #uf, #actions{

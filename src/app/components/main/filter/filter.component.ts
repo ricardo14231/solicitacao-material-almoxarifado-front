@@ -162,7 +162,7 @@ export class FilterComponent implements OnInit {
   private lastProductSelectedIsNotNull(): boolean{
     if(this.lastProductSelected != null){
       //VER SE DÁ PARA COLOCAR VIA FORMCONTROLE PARA ELIMINAR ESSA VARIÁVEL
-      this.lastProductSelected.amount = this.amountProduct;
+      this.lastProductSelected.amount = (this.amountProduct !== null ? this.amountProduct : 1);
       return true;
     }  
     this.messageService.message('Selecione um produto!', 'alert', 3);
