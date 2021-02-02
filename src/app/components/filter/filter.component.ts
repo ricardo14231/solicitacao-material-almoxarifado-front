@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { Sector } from 'src/app/models/sector.model';
 import { FavoriteService } from 'src/app/services/favorite/favorite.service';
 import { MessageService } from 'src/app/services/message/message.service';
-import { borderBottomLeftRadius } from 'html2canvas/dist/types/css/property-descriptors/border-radius';
 
 
 @Component({
@@ -23,13 +22,14 @@ export class FilterComponent implements OnInit {
     private messageService: MessageService,
   ) { }
 
-  sectors: string [];
+  sectors: Sector[];
   queryField = new FormControl();
   result: Observable<any>;
   options: Product [] = [];
   lastProductSelected: Product = null;
   productList: Product[] = [];
-
+  productListed: boolean = true;
+  fieldUF: string = "UF";
   amountProduct: number = null;
 
   //Ver se não tem como adicionar via FormControl
@@ -58,7 +58,7 @@ export class FilterComponent implements OnInit {
     }
   }
 
-  private borderRadiusFucntion(active: boolean): void{
+  private borderRadiusFunction(active: boolean): void{
     if(active){
       this.divProduct.nativeElement.style.borderBottomLeftRadius = '0';
       this.divProduct.nativeElement.style.borderBottomRightRadius = '0';
@@ -70,14 +70,11 @@ export class FilterComponent implements OnInit {
 
   public initListSector(): void{
     this.filterService.listSector().subscribe((res: Sector[]) => {
-      this.sectors = res.map((sector : Sector) => {
-        return sector.name_sector.substring(14, sector.name_sector.length);
-      });
+      this.sectors = res
     });
   }
 
   public initSearchProduct(): void{
-
     this.result = this.queryField.valueChanges
       .pipe(
         map(value => value.trim()),
@@ -100,17 +97,31 @@ export class FilterComponent implements OnInit {
   public searchResult(): void{
     this.result.subscribe((res: Product[]) => {
       this.options = res;
-
+      this.productListed = true;
+     
       if(this.options[0] == undefined){
         this.messageService.message("Produto não cadastrado!", "alert", 2);
+        this.productListed = false;
       }
 
       if(this.options.length > 0){
-        this.borderRadiusFucntion(true);
+        this.borderRadiusFunction(true);
       }else{
-        this.borderRadiusFucntion(false);
+        this.borderRadiusFunction(false);
       }
     });
+  }
+
+  private insertproductListed(): void{
+    this.amountProduct = 1;
+    console.log(this.fieldUF)
+    this.lastProductSelected = {
+      id: 0, 
+      code: '00.00.00.000000000-0',
+      amount: this.amountProduct,
+      name: this.queryField.value, 
+      uf: this.fieldUF.toUpperCase()
+    }
   }
 
   private clearListOfProduct(): void{
@@ -120,49 +131,56 @@ export class FilterComponent implements OnInit {
   public productSelected(event, index): void{
     
     this.amountProduct = 1;
-
     this.lastProductSelected = this.options[index];
+    this.fieldUF = this.lastProductSelected.uf;
 
     this.clearListOfProduct();
     
-    this.borderRadiusFucntion(false);
+    this.borderRadiusFunction(false);
   }
 
   public addProduct(): void{
-    
-    //SEPARAR ESSA FUNÇÃO EM OUTRAS
 
+    if(!this.productListed)
+        this.insertproductListed();
+    
+    if(this.maxItemPerOrder() && this.lastProductSelectedIsNotNull() && this.productAlreadySelected(this.lastProductSelected)){
+      this.productList.push(this.lastProductSelected);
+    
+      //Compartilha a lista de produtos para os outros componentes via Service
+      this.filterService.productList(this.productList);
+
+      // PARA LIMPAR O INPUT DO FILTRO DE PRODUTO - MIDIFICAR PARA LIMPAR O CAMPO SEM REMOVER O ULTIMO PRODUTO SELECIONADO
+      this.clearDataInput();
+
+      this.borderRadiusFunction(false); 
+    }
+  }
+
+  private lastProductSelectedIsNotNull(): boolean{
     if(this.lastProductSelected != null){
-      //TO DO
       //VER SE DÁ PARA COLOCAR VIA FORMCONTROLE PARA ELIMINAR ESSA VARIÁVEL
       this.lastProductSelected.amount = this.amountProduct;
-      
-      //Verifica se o item selecionado já está na lista; Se tiver ele não é adicionado
-      if(this.productAlreadySelected(this.lastProductSelected)){
-        this.messageService.message('Produto já adicionado!', 'alert', 4)
-      }else{
-
-        this.productList.push(this.lastProductSelected);
-      
-        //Compartilha a lista de produtos para os outros componentes via Service
-        this.filterService.productList(this.productList);
-    
-        // PARA LIMPAR O INPUT DO FILTRO DE PRODUTO - MIDIFICAR PARA LIMPAR O CAMPO SEM REMOVER O ULTIMO PRODUTO SELECIONADO
-        this.clearDataInput();
-
-        this.borderRadiusFucntion(false);
-
-      }
-    }else{
-      this.messageService.message('Selecione um produto!', 'alert', 3) 
+      return true;
+    }  
+    this.messageService.message('Selecione um produto!', 'alert', 3);
+    return false;
+  }
+  //REMOVER QUANDO FOR POSSÍVEL GERAR ARQUIVOS  PDFs COM MÚLTIPLAS PÁGINAS
+  private maxItemPerOrder(): Boolean {
+    if(this.productList.length < 32){
+      return true;
     }
-    
+    this.messageService.message('Limite de produtos por pedido atingido! Por favor, continue em um novo pedido.', 'danger', 7);
+    return false;
   }
 
   public clearDataInput(): void{
     this.amountProduct = null;
     this.lastProductSelected = null;
     this.queryField.setValue('');
+    this.fieldUF = "UF";
+    this.productListed = true;
   }
   
   public selectedSector(value): void{
@@ -181,13 +199,14 @@ export class FilterComponent implements OnInit {
     }
     
   }
-
+  
+  //Verifica se o item selecionado já está na lista; Se tiver ele não é adicionado
   private productAlreadySelected(product: Product): boolean{
-     
-    if(this.productList.find(element => element.id == product.id) == undefined) 
-      return false;
-
-    return true;
+    if(this.productList.find(element => element.id == product.id) == undefined || product.id === 0){
+      return true;
+    } 
+    this.messageService.message('Produto já adicionado!', 'alert', 4);
+    return false;
   }
   
 }

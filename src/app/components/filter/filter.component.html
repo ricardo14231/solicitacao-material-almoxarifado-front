@@ -3,7 +3,7 @@
     <div class="selectSector">
       <select name="sectors" #valueSelect (change)="selectedSector(valueSelect.value)" required>
         <option value="-1"> Setor </option> 
-        <option *ngFor="let sector of sectors" [value]="sector"> {{ sector }} </option> 
+        <option *ngFor="let sector of sectors" [value]="sector.name_sector"> {{ sector.name_sector | slice: 14:sector.name_sector.length }} </option> 
       </select>
     </div>
   
@@ -21,10 +21,10 @@
     </div>
   
     <div class="amountProduct" #divAmountProduct>
-      <input id="amount" type="text" placeholder="Qtd." name="inputAmount" 
+      <input id="amount" type="number" placeholder="Qtd." name="inputAmount" 
         (focus)="focusFunction($event)" (focusout)="focusFunction($event)" 
-        [(ngModel)]="amountProduct"/>
-      <input id="uf" type="text" placeholder="UF" disabled="true" [value]="lastProductSelected?.uf"/> 
+        [(ngModel)]="amountProduct" min="1"/>
+      <input id="uf" type="text" placeholder="UF" [disabled]="productListed" [(ngModel)]="fieldUF" maxlength="2"/> 
     </div>
   </div>
 

@@ -19,8 +19,8 @@ ul li{
     background-color: #fff;
     position: absolute;
     top: 0px;
-    /* top: 400px;
-    left: 0px;  */
+   /*  top: 400px;
+    left: 0px;   */
     left: -1500px; 
     visibility: hidden;   
 }
@@ -144,6 +144,10 @@ ul li{
 .bodyPDF td{
     text-align: center;
     font-size: 14px;
+}
+
+.bodyPDF tbody .description{
+    text-align: left;
 }
 
 .bodyPDF th, .bodyPDF td{

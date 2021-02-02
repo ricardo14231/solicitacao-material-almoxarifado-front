@@ -14,8 +14,8 @@
             <tr *ngFor='let product of productList; let i = index'>
                 <td>{{ product.id }}</td>
                 <td>{{ product.code }}</td>
-                <td><input type="number" [(ngModel)]='product.amount'></td>
-                <td [title]="product.name">{{ product.name }}</td>
+                <td><input type="number" [(ngModel)]='product.amount' min="0"></td>
+                <td class="description" [title]="product.name">{{ product.name }}</td>
                 <td>{{ product.uf }}</td>
                 <td> <img src="assets/clear.svg" (click)="removeProduct(i)"> </td>
             </tr>

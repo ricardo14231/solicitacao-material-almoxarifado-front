@@ -34,14 +34,17 @@ td{
     text-align: center;
 }
 
+.description{
+    text-align: left;
+}
+
 th, td{
     padding: 3px;
     border: 1px solid #e9ecef;
     border-top: transparent;
     border-left: transparent;
     border-right: transparent;
-    border-bottom: 1px solid rgba(0, 0, 0, .05);;
-
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
 }
 
 tbody tr td input{
@@ -50,7 +53,7 @@ tbody tr td input{
     padding: 8px;
 }
 
-#id, #ped, #uf, #actions{
+#id, #code, #ped, #uf, #actions{
     width: 5%;
 }
 #code{

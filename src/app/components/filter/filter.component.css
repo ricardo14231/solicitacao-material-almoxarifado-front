@@ -71,7 +71,7 @@
 .containerFilter .amountProduct{
     position: relative;
     left: 20px;
-    min-width: 101px;
+    min-width: 118px;
 }
 
 .containerFilter .amountProduct #amount{
@@ -89,7 +89,7 @@
 }
 
 .containerFilter .amountProduct #amount{
-    width: 53px; 
+    width: 70px; 
 }
 
 /*

@@ -29,7 +29,6 @@ export class ViewPdfComponent implements OnInit {
   private setCurrentDatePrintPDF(): void{
     this.generatePdfService.currentDateEmitter.subscribe((res: Date) => {
       this.currentDate = res;
-      console.log(this.currentDate)
     });
   }
 

@@ -26,7 +26,9 @@ export class MessageService {
     4 - produto já selecionados 
     5 - lista de produtos vazia - impressão
     6 - novas funcionalidades
-  
+    //Temporário
+    7 - limite de itens por pedido atingido
+    
   */
 
 }
