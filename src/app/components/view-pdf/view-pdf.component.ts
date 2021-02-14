@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FilterService } from 'src/app/services/filter/filter.service';
 import { GeneratePdfService } from 'src/app/services/pdf/generate-pdf.service';
 import { SectorService } from 'src/app/services/serctor/sector.service';
@@ -22,6 +23,7 @@ export class ViewPdfComponent implements OnInit {
   @ViewChild('containerViewPDF') containerViewPDF: ElementRef;
   public currentDate = new Date();
   public versionTable: string = null;
+  private subscription: Subscription[] = []
   
   ngOnInit(): void {
     this.setVersionTable();
@@ -31,9 +33,11 @@ export class ViewPdfComponent implements OnInit {
   }
 
   private setCurrentDatePrintPDF(): void{
-    this.generatePdfService.currentDateEmitter.subscribe((res: Date) => {
-      this.currentDate = res;
-    });
+    this.subscription.push(  
+      this.generatePdfService.currentDateEmitter.subscribe((res: Date) => {
+        this.currentDate = res;
+      })
+    )
   }
 
   private setVersionTable(){
@@ -46,15 +50,25 @@ export class ViewPdfComponent implements OnInit {
   }
 
   private setProductList(): void{
-    this.filterService.productListEmitter.subscribe((res: Product[]) => {
-      this.productList = res;
-    });
+    this.subscription.push(
+      this.filterService.productListEmitter.subscribe((res: Product[]) => {
+        this.productList = res;
+      })
+    )
   }
 
   private setNameSector(): void{
-    this.sectorService.nameSectorEmitter.subscribe((res: string) => {
-      this.sector = res;
-    });
+    this.subscription.push(  
+      this.sectorService.nameSectorEmitter.subscribe((res: string) => {
+        this.sector = res;
+      })
+    )
+  }
+  
+  ngOnDestroy(): void {
+    this.subscription.forEach( sub => {
+      sub.unsubscribe();
+    })
   }
 
 }

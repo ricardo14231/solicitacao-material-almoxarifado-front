@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
 import { FilterService } from 'src/app/services/filter/filter.service';
 
@@ -9,25 +10,29 @@ import { FilterService } from 'src/app/services/filter/filter.service';
 })
 export class TableComponent implements OnInit {
 
-  @Input()
-  productList: Product[] = [];
-
   constructor(
     private filterService: FilterService, 
   ) { }
 
+  @Input()
+  productList: Product[] = [];
+  private subscription = new Subscription();
+  
   ngOnInit(): void {
     this.getProductList();
   }
 
   public getProductList(): void{
-    this.filterService.productListEmitter.subscribe((res => {
-      this.productList = res;
-    }));
+    this.subscription = this.filterService.productListEmitter.subscribe((res => {
+        this.productList = res;
+      }))
   } 
 
   public removeProduct(index){
     this.productList.splice(index, 1);
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
+  }
 }

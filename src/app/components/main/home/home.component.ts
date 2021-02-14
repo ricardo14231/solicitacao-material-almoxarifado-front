@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
 import { FilterService } from 'src/app/services/filter/filter.service';
 import { MessageService } from 'src/app/services/message/message.service';
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(ViewPdfComponent) containerPDF: ViewPdfComponent;
   nameSector: string = '-1';
   productList: Product[] = [];
+  private subscription: Subscription[] = []
   
   ngOnInit(): void {
     this.getNameSector();
@@ -59,15 +61,19 @@ export class HomeComponent implements OnInit {
   }
 
   private getNameSector(): void{
-    this.sectorService.nameSectorEmitter.subscribe((value => {
-      this.nameSector = value;
-    }));
+    this.subscription.push(
+      this.sectorService.nameSectorEmitter.subscribe((value => {
+        this.nameSector = value;
+      }))
+    )
   }
 
   private getProductList(): void{
-    this.filterService.productListEmitter.subscribe((value => {
-      this.productList = value;
-    }));
+    this.subscription.push(
+      this.filterService.productListEmitter.subscribe((value => {
+        this.productList = value;
+      }))
+    )
   }
   
   private selectedSector(): boolean{
@@ -86,6 +92,10 @@ export class HomeComponent implements OnInit {
     return true;
   }
 
-
+  ngOnDestroy(): void {
+    this.subscription.forEach( sub => {
+      sub.unsubscribe();
+    })
+  }
 
 }

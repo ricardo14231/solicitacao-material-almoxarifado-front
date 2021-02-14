@@ -37,6 +37,7 @@ export class GeneratePdfService {
           //Opção para abrir o PDf em um nova janela do navegador.
           let viewPrint = window.open(URL.createObjectURL(pdf.output("blob"))); 
           viewPrint.window.print();
+         
         }else{
           let date = new Date();
           // Opção para baixar o PDF

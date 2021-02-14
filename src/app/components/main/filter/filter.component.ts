@@ -3,12 +3,12 @@ import { Product } from 'src/app/models/product.model';
 import { FilterService } from 'src/app/services/filter/filter.service';
 import { FormControl } from '@angular/forms';
 import { map, filter, debounceTime, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Sector } from 'src/app/models/sector.model';
 import { FavoriteService } from 'src/app/services/favorite/favorite.service';
 import { MessageService } from 'src/app/services/message/message.service';
 import { SectorService } from 'src/app/services/serctor/sector.service';
-
+ 
 
 @Component({
   selector: 'app-filter',
@@ -24,6 +24,7 @@ export class FilterComponent implements OnInit {
     private messageService: MessageService,
   ) { }
 
+  private subscription: Subscription[] = []
   sectors: Sector[];
   queryField = new FormControl();
   result: Observable<any>;
@@ -71,9 +72,11 @@ export class FilterComponent implements OnInit {
   }
 
   public initListSector(): void{
-    this.sectorService.listSector().subscribe((res: Sector[]) => {
-      this.sectors = res;
-    });
+    this.subscription.push(
+      this.sectorService.listSector().subscribe((res: Sector[]) => {
+        this.sectors = res;
+      })
+    )
   }
 
   public initSearchProduct(): void{
@@ -97,29 +100,29 @@ export class FilterComponent implements OnInit {
   }
 
   public searchResult(): void{
-    this.result.subscribe((res: Product[]) => {
-      this.options = res;
-      this.productListed = true;
-     
-      if(this.options[0] == undefined){
-        this.messageService.message("Produto não cadastrado!", "alert", 2);
-        this.productListed = false;
-      }
+    this.subscription.push(
+      this.result.subscribe((res: Product[]) => {
+        this.options = res;
+        this.productListed = true;
+      
+        if(this.options[0] == undefined){
+          this.messageService.message("Produto não cadastrado!", "alert", 2);
+          this.productListed = false;
+        }
 
-      if(this.options.length > 0){
-        this.borderRadiusFunction(true);
-      }else{
-        this.borderRadiusFunction(false);
-      }
-    });
+        if(this.options.length > 0){
+          this.borderRadiusFunction(true);
+        }else{
+          this.borderRadiusFunction(false);
+        }
+      })
+    )
   }
 
   private insertproductListed(): void{
-    this.amountProduct = 1;
-    console.log(this.fieldUF)
     this.lastProductSelected = {
       id: 0, 
-      code: '00.00.00.000000000-0',
+      code: '00.00.00.00000000-0',
       amount: this.amountProduct,
       name: this.queryField.value, 
       uf: this.fieldUF.toUpperCase()
@@ -209,6 +212,12 @@ export class FilterComponent implements OnInit {
     } 
     this.messageService.message('Produto já adicionado!', 'alert', 4);
     return false;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach( sub => {
+      sub.unsubscribe();
+    })
   }
   
 }

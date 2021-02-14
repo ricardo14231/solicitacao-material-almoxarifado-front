@@ -1,15 +1,22 @@
+form {
+   /*  position: relative; */
+    top: 30px;
+}
+
 .nameSector, .activeSector{
     position: relative;
     margin-top: 10px;
 }
 
-#nameSector{
+#nameSector, #codeSimpas{
     display: block;
     margin-top: 5px;
 }
 
+#codeSimpas {
+    width: 200px;
+}
 .activeSector{
-    position: relative;
     top: 10px;
     display: flex;
-}
+} 

@@ -8,6 +8,7 @@ import { FormSectorComponent } from './components/crud-modules/sector/form-secto
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},  
+  
   { path: 'home', component: HomeComponent },
 
   { path: 'homeSector', component: MainSectorComponent,

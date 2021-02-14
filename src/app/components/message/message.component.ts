@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'src/app/services/message/message.service';
 import { Message } from 'src/app/models/message.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-message',
@@ -14,13 +15,14 @@ export class MessageComponent implements OnInit {
   ) { }
 
   dialogMessage: Message[] = [];
+  private subscription = new Subscription()
   
   //TO-DO
   //ALTERAR - PEGAR O ELEM NO DOM E SETAR A CLASS - Atualizado - remover após ver a linha 29
   cardMessage: string = 'hidden'
 
   ngOnInit(): void {
-    this.messageService.messageEmitter.subscribe((res: Message) => {
+    this.subscription = this.messageService.messageEmitter.subscribe((res: Message) => {
      
       if(this.showMessage(res)){
         this.dialogMessage.push(res);
@@ -54,6 +56,10 @@ export class MessageComponent implements OnInit {
   public removeMessage(event): void{
     //Ver se precisa remover o setTimeout da mensagem removida
     this.dialogMessage.splice(event.target.id, 1);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

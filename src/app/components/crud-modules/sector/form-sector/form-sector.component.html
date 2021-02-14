@@ -1,4 +1,9 @@
 <form  (ngSubmit)="onSubmit()">
+    <div class="codeSimpas">
+        <label for="codeSimpas">Cód. SIMPAS</label>
+        <input type="text" name="codeSimpas" id="codeSimpas" placeholder="Cód. SIMPAS"/>
+    </div>
+    
     <div class="nameSector">
         <label for="nameSector">Nome</label>
         <input type="text" name="nameSector" id="nameSector" placeholder="Nome do setor"/>
@@ -8,7 +13,6 @@
         <label for="activeSector">Ativo</label>
         <input type="checkbox" name="create activeSector" id="activeSector"/>
     </div>
-    
     
     <div class="buttonSaveAndCancel">
         <button class="save" type="submit"> <img src="assets/saveFloppy.svg"> Gravar</button>
